@@ -163,7 +163,7 @@ public class PDFServiceImpl implements PDFService {
             formFields.forEach((k,v) -> {
                 if (0 == PdfName.Tx.compareTo(v.getFormType())) {
                     // Text field
-                    debugField("initials state",v);
+                    debugField("initial state",v);
                     float fontSize;
                     if(globalFontSize>0){
                         fontSize = globalFontSize;
