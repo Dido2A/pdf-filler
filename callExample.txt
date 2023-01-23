@@ -1,0 +1,2 @@
+/lib/jvm/java-17-amazon-corretto/bin/java -jar -Dfill-out.font=file:/home/dian/src/pdffiller/arialunicodems.ttf pdffiller-0.0.1-SNAPSHOT.jar.original
+curl -i -w "\n" -X POST -H 'Content-Type: application/json' -d '{"TextBox1":"[Диян Dian]","TextBox2":"[Ангелов Angelov]"}' http://localhost:8080/fillout/flattened/Test2.pdf

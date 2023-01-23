@@ -1,0 +1,14 @@
+[Unit]
+Description=A Spring Boot PDF filler application
+After=syslog.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=4
+User=root
+ExecStart=/bin/bash -c "/lib/jvm/java-17-amazon-corretto/bin/java -jar -Dfill-out.font=file:/home/dian/src/pdffiller/arialunicodems.ttf /home/dian/src/pdffiller/target/pdffiller-0.0.1-SNAPSHOT.jar.original"
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

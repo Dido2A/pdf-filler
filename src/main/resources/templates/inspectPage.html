@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- To use thymeleaf -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#dataTable').DataTable();
+        } );
+    </script>
+    <title>Home</title>
+</head>
+<body>
+
+
+<!--    Creates a big gray field  -->
+<div class="jumbotron">
+    <!-- Big words -->
+    <h1 class="display-4">Coronavirus tracker</h1>
+    <!--   Big words description -->
+    <p class="lead">Tracking this pandemic one at a time</p>
+    <!--    Marks bottom part of jumbotron   -->
+    <hr class="my-4">
+    <div class="container">
+        <!-- Gride layout with each col detonated by class ="col" -->
+        <div class="row">
+            <div class="col">
+                <h3>
+                    <p class="font-weight-bold">Total world cases</p>
+                    <!--    p tag takes up the entire width -->
+                    <p class="font-weight-bold" th:text="${worldCases}"></p>
+                    <p class="font-weight-bold" th:text="${percentage}"></p>
+                </h3>
+            </div>
+
+            <div class="col">
+                <h3>
+                    <p class="font-weight-bold">Total world deaths</p>
+                    <p class="font-weight-bold" th:text="${worldDeaths}"></p>
+                </h3>
+            </div>
+            <div class="col">
+                <h3>
+                    <p class="font-weight-bold">World population</p>
+                    <div class="font-weight-bold" th:text="${worldPop}"></div>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--    @id give id to the table and match the javascript
+    @page-length to match the default entries per page
+    @data-order to set the default way to display order. It is now 1st col in descending order -->
+<table class="table table-striped" id="dataTable" data-page-length='50' data-order='[[1, "desc"]]'>
+    <thead>
+    <tr>
+
+        <th scope="col">County</th>
+        <th scope="col">Total cases</th>
+        <th scope="col">New cases</th>
+        <th scope="col">Total deaths</th>
+        <th scope="col">Population</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="item :${alldata}">
+        <td th:text="${item.country}"></td>
+        <td th:text="${item.totalCases}"></td>
+        <td th:text="${item.newCases}"></td>
+        <td th:text="${item.totalDeaths}"></td>
+        <td th:text="${item.pop}"></td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+
+</body>
+</html>

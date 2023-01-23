@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: "PDFFiller API"
+  description: "PDFFiller API"
+  version: "1.0.0"
+servers:
+  - url: 'http://localhost:8888'
+paths:
+
+  /:
+    get:
+      summary: "GET "
+      operationId: "listUploadedFiles"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+
+    post:
+      summary: "POST "
+      operationId: "handleFileUpload"
+      parameters:
+        - name: "file"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+            format: "binary"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+
+  /files/{filename}:
+    get:
+      summary: "GET files/{filename}"
+      operationId: "serveFile"
+      parameters:
+        - name: "filename"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseEntity"
+
+  /fillout/{pdfFileName}:
+    post:
+      summary: "POST fillout/{pdfFileName}"
+      operationId: "fillOutPdfForm"
+      parameters:
+        - name: "pdfFileName"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NavigableMap"
+        required: true
+      responses:
+        "201":
+          description: "Created"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+
+  /fillout/flattened/{pdfFileName}:
+    post:
+      summary: "POST fillout/flattened/{pdfFileName}"
+      operationId: "flattenFilledOutPdfForm"
+      parameters:
+        - name: "pdfFileName"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NavigableMap"
+        required: true
+      responses:
+        "201":
+          description: "Created"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+
+  /fillout/fields/{pdfFileName}:
+    get:
+      summary: "GET fillout/fields/{pdfFileName}"
+      operationId: "getPdfFields"
+      parameters:
+        - name: "pdfFileName"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NavigableMap"
+
+  /fillout/mocked/{pdfFileName}:
+    post:
+      summary: "POST fillout/mocked/{pdfFileName}"
+      operationId: "fillMockedData"
+      parameters:
+        - name: "pdfFileName"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
