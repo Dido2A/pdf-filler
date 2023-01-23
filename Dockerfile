@@ -5,6 +5,7 @@ COPY upload-dir/* /home/spring/upload-dir/
 RUN chown -R 100:101 /home/spring/upload-dir
 COPY *.ttf ./
 USER spring:spring
+# The target folder below is where Maven/IntelliJ will keep the compiled artifact (jar)
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} pdf-filler.jar
 ENTRYPOINT ["java","-jar","/pdf-filler.jar"]
